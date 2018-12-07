@@ -1,0 +1,43 @@
+.MainStyle {
+    display: grid;
+    grid-template-columns:35% repeat( auto-fit, minmax(400px, 30%) ) 35%;
+    grid-template-rows: 15vh repeat( auto-fit, minmax(250px, 50vh) ) 30vh;
+    background: #f2f2f2;
+}
+*{
+    box-sizing: border-box;
+}
+.register {
+    grid-row:2;
+    grid-column: 2;
+    display: grid;
+    height: 480px;
+    border: 1px solid rgb(212, 212, 212);
+    border-radius: 8px;
+    padding: 20px;
+    grid-template-rows: 1fr 40px 1fr 1fr 1fr;
+    grid-row-gap: 3px;
+    background: white;
+}
+input {
+    width: 100%;
+    font-size: 16px;
+}
+h1 {
+    text-align: center;
+}
+.error {
+    color:red;
+    font-size: 16px;
+
+}
+.SignUpButton:hover {
+    background: radial-gradient(at top, rgb(4, 96, 99), rgb(4, 141, 146));
+}
+.SignUpButton {
+    grid-row: 2;
+    border-radius: 8px;
+    border: solid 1px #1680bd;
+    background: radial-gradient(at top, rgb(5, 122, 126), rgb(7, 174, 180));
+
+}
