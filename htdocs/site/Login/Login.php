@@ -30,12 +30,14 @@ if(isset($_SESSION["session_email"])){
  {
 while($row=mysqli_fetch_assoc($query))
  {
-	$dbemail=$row['email'];
+    $dbemail=$row['email'];
+    $dbid=$row['id'];
   $dbpassword=$row['password'];
  }
   if($email == $dbemail && $password == $dbpassword)
  {
 	 $_SESSION['session_email']=$email;	 
+	 $_SESSION['session_userid']=$dbid;	 
  /* Перенаправление браузера */
      header("Location: http://${IpAddress}/site/CountUtilities/CountUtilities.php");
     }

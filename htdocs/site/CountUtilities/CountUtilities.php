@@ -16,9 +16,9 @@ if(!isset($_SESSION["session_email"])){
 }
 ?>
         <?php
-        $selectedUtilities = $mysqli->query("SELECT users.id as usersid , bill.serviceid as serviceid,
-        bill.servicename as servicename, bill.value as servicecost FROM bill,
-        users WHERE bill.userid = users.id AND users.email = '{$_SESSION['session_email']}'");
+        $selectedUtilities = $mysqli->query("SELECT users.id as usersid , utilities.serviceid as serviceid,
+        utilities.servicename as servicename, utilities.value as servicecost FROM utilities,
+        users WHERE utilities.userid = '{$_SESSION['session_userid']}' AND users.email = '{$_SESSION['session_email']}'");
             printf(mysqli_error($mysqli));
         ?>
         <?php
@@ -40,27 +40,19 @@ if(!isset($_SESSION["session_email"])){
         </label><p>
             <?php
             if(isset($_POST["addUtiliti"])){
-                // сделай так чтобы принимать int значение с бд
                 $addingVar=$mysqli->query("SELECT servicelist.cost as addingcost 
                 FROM servicelist WHERE servicelist.name = '{$_POST["addUtiliti"]}'");
-                ///////\\
-                echo $_POST["addUtiliti"];
-                // echo $addingVar.addingcost;
-                //servic
+                $servicename=$_POST["addUtiliti"];
+                $userid = (integer) $_SESSION['session_userid'];
                 $servicecost = mysqli_fetch_assoc($addingVar);
-                // echo $servicecost['addingcost'];
-                $userid = mysqli_fetch_assoc($selectedUtilities);
-                echo $userid['usersid'];
-                echo $_POST["addUtiliti"];
-                echo "Запрос к бд с '{$_POST["addUtiliti"]}' '{$servicecost["addingcost"]}' '{$userid["usersid"]}'";
-                $mysqli->query("INSERT INTO `bill` (`serviceid`, `value`, `userid`, `servicename`)
-                 VALUES (NULL,'{$servicecost["addingcost"]}', '{$userid["usersid"]}', '{$_POST["addUtiliti"]}')");
-                 echo "Конец запроса";
+                $servicecost = (integer) $servicecost['addingcost'];
+                $mysqli->query("INSERT INTO `utilities` ( `serviceid`, `value`, `userid`, `servicename`)
+                 VALUES (NULL, '$servicecost', '$userid', '$servicename')");
                 echo mysqli_error($mysqli);
-                // $servicecost["addingcost"]='';
-                // $userid["usersid"]='';
-                // $_POST["addUtiliti"]='';
-
+                $selectedUtilities = $mysqli->query("SELECT users.id as usersid , utilities.serviceid as serviceid,
+                utilities.servicename as servicename, utilities.value as servicecost FROM utilities,
+                users WHERE utilities.userid = users.id AND users.email = '{$_SESSION['session_email']}'");
+                    printf(mysqli_error($mysqli));
             }
             ?>
 
@@ -72,15 +64,31 @@ if(!isset($_SESSION["session_email"])){
                 <tr>
                     <th>Ваши коммунальные услуги</th>
                     <th>Стоимость</th>
+                    <th>Удалить</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
+                if(isset($_POST["deleteUtiliti"])){
+                    $id=htmlspecialchars($_POST['deleteUtiliti']);
+                    $mysqli->query("DELETE FROM `utilities` WHERE `utilities`.`serviceid` = $id");
+                    $selectedUtilities = $mysqli->query("SELECT users.id as usersid , utilities.serviceid as serviceid,
+                    utilities.servicename as servicename, utilities.value as servicecost FROM utilities,
+                    users WHERE utilities.userid = users.id AND users.email = '{$_SESSION['session_email']}'");
+                        printf(mysqli_error($mysqli));
+                }
                 $summary_cost=0;
         while ($row = mysqli_fetch_assoc($selectedUtilities)) {
             echo '<tr>';
             echo '<td>'.$row["servicename"].'</td>';
             echo '<td>'.$row["servicecost"].'</td>';
+            echo '<td>
+            <form name="deleteUtiliti" method="post">
+                <button type="submit" name="deleteUtiliti" value="'.$row["serviceid"].'">
+                x
+                </button>
+            </form>
+            </td>';
             echo '</tr>';
             $summary_cost=$summary_cost+$row["servicecost"];
         };
