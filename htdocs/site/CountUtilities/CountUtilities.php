@@ -28,6 +28,7 @@ if(!isset($_SESSION["session_email"])){
         <p><label>Выберите услугу
             <form method="post">
             <select name="addUtiliti">
+                <option disabled selected>Выберите услугу</option>
                 <?php 
                 while( $row = mysqli_fetch_assoc($availableUtilities) ) {
                     echo '<option>'.$row["serviceName"].'</option>';
@@ -39,10 +40,27 @@ if(!isset($_SESSION["session_email"])){
         </label><p>
             <?php
             if(isset($_POST["addUtiliti"])){
+                // сделай так чтобы принимать int значение с бд
                 $addingVar=$mysqli->query("SELECT servicelist.cost as addingcost 
                 FROM servicelist WHERE servicelist.name = '{$_POST["addUtiliti"]}'");
+                ///////\\
                 echo $_POST["addUtiliti"];
                 // echo $addingVar.addingcost;
+                //servic
+                $servicecost = mysqli_fetch_assoc($addingVar);
+                // echo $servicecost['addingcost'];
+                $userid = mysqli_fetch_assoc($selectedUtilities);
+                echo $userid['usersid'];
+                echo $_POST["addUtiliti"];
+                echo "Запрос к бд с '{$_POST["addUtiliti"]}' '{$servicecost["addingcost"]}' '{$userid["usersid"]}'";
+                $mysqli->query("INSERT INTO `bill` (`serviceid`, `value`, `userid`, `servicename`)
+                 VALUES (NULL,'{$servicecost["addingcost"]}', '{$userid["usersid"]}', '{$_POST["addUtiliti"]}')");
+                 echo "Конец запроса";
+                echo mysqli_error($mysqli);
+                // $servicecost["addingcost"]='';
+                // $userid["usersid"]='';
+                // $_POST["addUtiliti"]='';
+
             }
             ?>
 
