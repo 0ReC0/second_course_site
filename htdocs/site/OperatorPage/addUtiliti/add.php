@@ -13,6 +13,24 @@
     if($_SESSION['session_rights'] != 'operator'){
         require_once("../../Login/checkRights.php");
     }
+    if(isset($_POST["OperatorInputs"])){
+        if(!empty($_POST['name']) && !empty($_POST['rate'])) {
+            $name= htmlspecialchars($_POST['name']);
+            $rate=htmlspecialchars($_POST['rate']);
+            if(isset($_POST["important"]) && $_POST["important"] == "on"){
+                $important = 1;
+            }
+            else{
+                $important = 0;
+            }
+           echo "$name $rate $important";
+           $mysqli->query("INSERT INTO `servicelist` ( `id`, `name`, `rate`, `important`)
+           VALUES (NULL, '$name', '$rate', '$important')");
+        }
+        else {
+            $message="Все поля должны быть заполнены";
+        }
+    }
     ?>
     <div class="actions">
     <span style="grid-row:1; font-size:20px;text-align:center;">Добавление услуги</span>
