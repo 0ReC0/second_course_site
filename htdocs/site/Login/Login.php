@@ -20,7 +20,7 @@ if(isset($_SESSION["session_email"])){
 
 	if(isset($_POST["login"])){
 
-    $message = 'login';
+    $message = 'Unexpected error';
 	if(!empty($_POST['email']) && !empty($_POST['password'])) {
 	$email=htmlspecialchars($_POST['email']);
 	$password=htmlspecialchars($_POST['password']);
@@ -32,14 +32,18 @@ while($row=mysqli_fetch_assoc($query))
  {
     $dbemail=$row['email'];
     $dbid=$row['id'];
-  $dbpassword=$row['password'];
+    $dbpassword=$row['password'];
+    $dbrights=$row['rights'];
+    $dbconfirmation=$row['confirmation'];
  }
   if($email == $dbemail && $password == $dbpassword)
  {
 	 $_SESSION['session_email']=$email;	 
-	 $_SESSION['session_userid']=$dbid;	 
- /* Перенаправление браузера */
-     header("Location: http://${IpAddress}/site/CountUtilities/CountUtilities.php");
+     $_SESSION['session_userid']=$dbid;
+     $_SESSION['session_rights']=$dbrights;
+     $_SESSION['session_confirmation']=$dbconfirmation;
+
+     require_once("checkRights.php");
     }
 	} else {
 	 $message = "Invalid email or password!";

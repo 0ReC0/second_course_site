@@ -6,6 +6,9 @@
 </head>
 <body>
     <div class="Container">
+<?php
+require("../Login/checkRights.php");
+?>
 <?php require_once("../DataBase/connection.php");?> 
 <?php
 
