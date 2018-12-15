@@ -41,7 +41,8 @@
         <label style="grid-row:4;">Обязательна ли услуга ?<input type="checkbox" name="important"></label>
         <label style="grid-row:5;"><input type="submit" name="OperatorInputs" value="Добавить услугу"></label>
     </form>
-    <p style="grid-row:6;"><a href="../../Logout/Logout.php">Выйти</a> из системы</p>
+    <p style="grid-row:6;"><a href="../selectAction.php">Вернуться</a> в меню выбора действия</p>
+    <p style="grid-row:7;"><a href="../../Logout/Logout.php">Выйти</a> из системы</p>
     </div>
 </body>
 </html>
