@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" media="screen" href="CountUtilities.css" />
+</head>
+<body>
+    <div class="Container">
+<?php require_once("../../DataBase/connection.php");?> 
+<?php
+
+session_start();
+require_once("../../IpAddress/IpAddress.php");
+if(!isset($_SESSION["session_email"])){
+    header("Location: http://${IpAddress}/site/Login/Login.php",true,301);
+}
+?>
+        <?php
+        $AllUsers = $mysqli->query("SELECT users.email as UserEmail FROM users");
+        ?>
+        <p><label>Выберите email пользователя
+            <form method="post">
+            <select name="selectUser">
+                <option disabled selected>Выберите email</option>
+                <?php 
+                while( $row = mysqli_fetch_assoc($AllUsers) ) {
+                    echo '<option>'.$row["UserEmail"].'</option>';
+                };
+                ?>
+            </select>
+                <input type="submit"  value="Выбрать" >
+            </form>
+        </label><p>
+        <?php
+        $_SESSION['IdeditUser']='';
+            if(isset($_POST["selectUser"])){
+        $_SESSION['selectedUser']=$_POST["selectUser"];
+        $selectedUtilities = $mysqli->query("SELECT users.id as usersid , utilities.serviceid as serviceid,
+        utilities.servicename as servicename, utilities.value as servicecost FROM utilities,
+            users WHERE users.email = '{$_SESSION['selectedUser']}'");
+        $userid=mysqli_fetch_assoc($selectedUtilities);
+        $_SESSION['IdeditUser']=$userid["usersid"];
+            printf(mysqli_error($mysqli));
+        }
+        if(isset($_POST["addUtiliti"])){
+            $addingVar=$mysqli->query("SELECT servicelist.rate as addingcost 
+                    FROM servicelist WHERE servicelist.name = '{$_POST["addUtiliti"]}'");
+            $servicename=$_POST["addUtiliti"];
+            $servicecost = mysqli_fetch_assoc($addingVar);
+            $servicecost = (integer) $servicecost['addingcost'];
+            $mysqli->query("INSERT INTO `utilities` ( `serviceid`, `value`, `userid`, `servicename`)
+                VALUES (NULL, '$servicecost', '{$_SESSION['IdeditUser']}', '$servicename')");
+            echo mysqli_error($mysqli);
+            $selectedUtilities = $mysqli->query("SELECT users.id as usersid , utilities.serviceid as serviceid,
+            utilities.servicename as servicename, utilities.value as servicecost FROM utilities,
+                users WHERE users.email = '{$_SESSION['selectedUser']}'");
+            printf(mysqli_error($mysqli));
+            
+        }
+        ?>
+        <?php
+        $availableUtilities = $mysqli->query("SELECT servicelist.name as serviceName FROM servicelist");
+        ?>
+    <div class="Select_Utiliti">
+        <p><label>Выберите услугу
+            <form method="post">
+            <select name="addUtiliti">
+                <option disabled selected>Выберите услугу</option>
+                <?php
+                while( $row = mysqli_fetch_assoc($availableUtilities) ) {
+                    echo '<option>'.$row["serviceName"].'</option>';
+                };
+                ?>
+            </select>
+                <input type="submit" value="Добавить" >
+            </form>
+        </label><p>
+
+    </div>
+    <!-- Counting Utilities -->
+    <div id="Counting_Utilities" class="Counting_Utilities">
+                <span>Выбранный пользователь <?php echo $_SESSION["selectedUser"];?></span>
+            <table>
+            <thead>
+                <tr>
+                    <th>Все коммунальные услуги</th>
+                    <th>Обязательная</th>
+                    <th>Удалить</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if(isset($_POST["deleteUtiliti"])){
+                    $id=htmlspecialchars($_POST['deleteUtiliti']);
+                    $mysqli->query("DELETE FROM `utilities` WHERE `utilities`.`serviceid` = $id");
+                    $selectedUtilities = $mysqli->query("SELECT utilities.serviceid as serviceid,
+                        utilities.servicename as servicename, utilities.important as serviceimportant FROM utilities,
+                        users WHERE users.email = '{$_SESSION['selectedUser']}'");
+                    printf(mysqli_error($mysqli));
+                }
+            if(isset($_SESSION['selectedUser'])){
+            while ($row = mysqli_fetch_assoc($selectedUtilities)) {
+                echo '<tr>';
+                echo '<td>'.$row["servicename"].'</td>';
+                echo '<td>'.$row["serviceimportant"].'</td>';
+                echo '<td>
+                <form name="deleteUtiliti" method="post">
+                    <button type="submit" name="deleteUtiliti" value="'.$row["serviceid"].'">
+                    x
+                    </button>
+                </form>
+                </td>';
+                echo '</tr>';
+            };
+        }
+        ?>
+            </tbody>
+        </table>
+    </div>
+    <!-- END Counting Utilities -->
+<p ><a href="../selectAction.php">Вернуться</a> в меню выбора действия</p>
+<p class="logout"><a href="../Logout/Logout.php">Выйти</a> из системы</p>
+
+</body>
+</html>

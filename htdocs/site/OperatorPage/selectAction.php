@@ -7,10 +7,10 @@
 <body>
     <div class="actions">
     <span style="grid-row:1; font-size:20px;text-align:center;">Выберите действие</span>
-    <label style="grid-row:2;"><a href="addUtiliti/add.php"> <input value="Добавить коммунальную услугу"></a></label>
-    <label style="grid-row:3;"><a href="remUtiliti/remove.php"> <input value="Удалить коммунальную услугу"></a></label>
-    <label style="grid-row:4;"><a href="addUtiliti/add.php"> <input value="Добавление услуги к конкретному пользователю"></a></label>
-    <label style="grid-row:5;"><a href="addUtiliti/add.php"> <input value="Удаление услуги конкретного пользователя"></a></label>
+    <label style="grid-row:2;"><a href="addUtiliti/add.php"> <input type="submit" value="Добавить коммунальную услугу"></a></label>
+    <label style="grid-row:3;"><a href="remUtiliti/remove.php"> <input  type="submit" value="Удалить коммунальную услугу"></a></label>
+    <label style="grid-row:4;"><a href="attachUtiliti/attach.php"> <input  type="submit" value="Добавление услуги к конкретному пользователю"></a></label>
+    <label style="grid-row:5;"><a href="addUtiliti/add.php"> <input type="submit"  value="Удаление услуги конкретного пользователя"></a></label>
     <p style="grid-row:6;"><a href="../../Logout/Logout.php">Выйти</a> из системы</p>
     </div>
 </body>
