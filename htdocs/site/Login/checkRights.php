@@ -3,7 +3,7 @@ require_once("IpAddress.php");
 ?>
 <?php
     if ($_SESSION['session_rights'] == 'admin'){
-        //  header("Location: http://${IpAddress}/site/CountUtilities/CountUtilities.php");
+         header("Location: http://${IpAddress}/site/AdminPage/selectAction.php");
         $message="admin";
      }
      else if ($_SESSION['session_rights'] == 'operator'){

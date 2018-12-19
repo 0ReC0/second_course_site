@@ -14,8 +14,7 @@
     <?php
     require_once("../IpAddress/IpAddress.php");
 if(isset($_SESSION["session_email"])){
-	// вывод "Session is set"; // в целях проверки
-    header("Location: http://${IpAddress}/site/CountUtilities/CountUtilities.php",true,301);
+    require_once("checkRights.php");
 }
 
 	if(isset($_POST["login"])){
