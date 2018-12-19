@@ -23,7 +23,6 @@
             else{
                 $important = 0;
             }
-           echo "$name $rate $important";
            $mysqli->query("INSERT INTO `servicelist` ( `id`, `name`, `rate`, `important`)
            VALUES (NULL, '$name', '$rate', '$important')");
         }
