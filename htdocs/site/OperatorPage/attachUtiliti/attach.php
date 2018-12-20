@@ -36,11 +36,11 @@ if(!isset($_SESSION["session_email"])){
         $_SESSION['EditedUserUtilitiImportant']='';
             if(isset($_POST["selectUser"])){
         $_SESSION['selectedUser']=$_POST["selectUser"];
-        $selectedUtilities = $mysqli->query("SELECT users.id as usersid , utilities.serviceid as serviceid,
+        $selectedUtilities = $mysqli->query("SELECT utilities.serviceid as serviceid, users.id as userId,
         utilities.servicename as servicename, utilities.important as serviceimportant FROM utilities,
-            users WHERE users.email = '{$_SESSION['selectedUser']}' AND users.rights = 'user'");
+        users WHERE users.email = '{$_SESSION['selectedUser']}' AND users.rights = 'user' AND users.id = utilities.userid");
         $selectedUtiliti=mysqli_fetch_assoc($selectedUtilities);
-        $_SESSION['EditedUserId']=$selectedUtiliti["usersid"];
+        $_SESSION['EditedUserId']=$selectedUtiliti["userId"];
         $_SESSION['EditedUserUtilitiImportant']=$selectedUtiliti["serviceimportant"];
             printf(mysqli_error($mysqli));
         }
@@ -51,13 +51,13 @@ if(!isset($_SESSION["session_email"])){
             $service = mysqli_fetch_assoc($addingVar);
             $serviceimportant = $service['serviceimportant'];
             $servicecost = (integer) $service['addingcost'];
-            $mysqli->query("INSERT INTO `utilities` ( `serviceid`, `value`, `userid`, `servicename`,`important`)
-                VALUES (NULL, '$servicecost', '{$_SESSION['EditedUserId']}', '$servicename','$serviceimportant')");
-            echo mysqli_error($mysqli);
-            $selectedUtilities = $mysqli->query("SELECT users.id as usersid , utilities.serviceid as serviceid,
+            $editedUser=$mysqli->query("SELECT users.id as UserId FROM users WHERE users.email = '{$_SESSION['selectedUser']}' ");
+            $editedUser=mysqli_fetch_assoc($editedUser);
+           $mysqli->query("INSERT INTO `utilities` ( `serviceid`, `rate`, `userid`, `servicename`,`important`)
+                VALUES (NULL, '$servicecost', '{$editedUser['UserId']}', '$servicename','$serviceimportant')");
+            $selectedUtilities = $mysqli->query("SELECT utilities.serviceid as serviceid,
             utilities.servicename as servicename, utilities.important as serviceimportant FROM utilities,
-                users WHERE users.email = '{$_SESSION['selectedUser']}' AND users.rights = 'user'");
-            printf(mysqli_error($mysqli));
+            users WHERE users.email = '{$_SESSION['selectedUser']}' AND users.rights = 'user' AND users.id = utilities.userid");
             
         }
         ?>
@@ -108,13 +108,17 @@ if(!isset($_SESSION["session_email"])){
                 }
             if(isset($_SESSION['selectedUser']) && isset($selectedUtilities)){
                 $selectedUtilities = $mysqli->query("SELECT utilities.serviceid as serviceid,
-                utilities.servicename as servicename,utilities.value as servicecost, utilities.important as serviceimportant FROM utilities,
-                users WHERE users.email = '{$_SESSION['selectedUser']}' AND users.rights = 'user'");
+                utilities.servicename as servicename,utilities.rate as servicecost, utilities.important as serviceimportant FROM utilities,
+                users WHERE users.email = '{$_SESSION['selectedUser']}' AND users.rights = 'user' AND users.id = utilities.userid");
             while ($row = mysqli_fetch_assoc($selectedUtilities)) {
                 echo '<tr>';
                 echo '<td>'.$row["servicename"].'</td>';
                 echo '<td>'.$row["servicecost"].'</td>';
-                echo '<td>'.$row["serviceimportant"].'</td>';
+                if ($row["serviceimportant"] == '1'){
+                    echo '<td>Да</td>';
+                }else{
+                    echo '<td>Нет</td>';
+                }
                 echo '<td>
                 <form name="deleteUtiliti" method="post">
                     <button type="submit" name="deleteUtiliti" value="'.$row["serviceid"].'">

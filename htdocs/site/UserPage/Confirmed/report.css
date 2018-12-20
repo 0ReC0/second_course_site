@@ -1,0 +1,14 @@
+.leftSide{
+    border-right:1px solid black;   
+}
+.space{
+    width: 100px;
+}
+.utHead{
+    width: 150px;
+    border:1px solid black;
+}
+
+hr{
+    width: 100%;
+}
