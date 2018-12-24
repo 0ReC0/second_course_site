@@ -38,7 +38,7 @@ if(!isset($_SESSION["session_email"])){
         $_SESSION['selectedUser']=$_POST["selectUser"];
         $selectedUtilities = $mysqli->query("SELECT users.id as usersid , utilities.serviceid as serviceid,
         utilities.servicename as servicename, utilities.important as serviceimportant FROM utilities,
-            users WHERE users.email = '{$_SESSION['selectedUser']}' AND users.rights = 'user'");
+            users WHERE users.email = '{$_SESSION['selectedUser']}' AND users.rights = 'user' AND users.id = utilities.userid");
         $selectedUtiliti=mysqli_fetch_assoc($selectedUtilities);
         $_SESSION['EditedUserId']=$selectedUtiliti["usersid"];
         $_SESSION['EditedUserUtilitiImportant']=$selectedUtiliti["serviceimportant"];
@@ -56,7 +56,7 @@ if(!isset($_SESSION["session_email"])){
             echo mysqli_error($mysqli);
             $selectedUtilities = $mysqli->query("SELECT users.id as usersid , utilities.serviceid as serviceid,
             utilities.servicename as servicename, utilities.important as serviceimportant FROM utilities,
-                users WHERE users.email = '{$_SESSION['selectedUser']}' AND users.rights = 'user'");
+                users WHERE users.email = '{$_SESSION['selectedUser']}' AND users.rights = 'user' AND users.id = utilities.userid");
             printf(mysqli_error($mysqli));
             
         }
@@ -80,15 +80,15 @@ if(!isset($_SESSION["session_email"])){
                 <?php
             if(isset($_SESSION['selectedUser']) && isset($selectedUtilities)){
                 $selectedUtilities = $mysqli->query("SELECT utilities.serviceid as serviceid,
-                utilities.servicename as servicename,utilities.value as servicecost,
+                utilities.servicename as servicename,utilities.rate as servicerate,
                  utilities.important as serviceimportant,users.id as userId FROM utilities,
-                users WHERE users.email = '{$_SESSION['selectedUser']}' AND users.rights = 'user'");
+                users WHERE users.email = '{$_SESSION['selectedUser']}' AND users.rights = 'user' AND users.id = utilities.userid");
                 $selectedUtiliti = mysqli_fetch_assoc($selectedUtilities);
                 $_SESSION['selectedUserID'] = $selectedUtiliti["userId"];
             while ($row = mysqli_fetch_assoc($selectedUtilities)) {
                 echo '<tr>';
                 echo '<td>'.$row["servicename"].'</td>';
-                echo '<td>'.$row["servicecost"].'</td>';
+                echo '<td>'.$row["servicerate"].'</td>';
                 if($row["serviceimportant"] == '1'){
                     echo '<td>Да</td>';
                 }

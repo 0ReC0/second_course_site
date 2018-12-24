@@ -13,43 +13,46 @@
     <?php require_once("../DataBase/connection.php");?> 
     <?php
     require_once("../IpAddress/IpAddress.php");
-if(isset($_SESSION["session_email"])){
-    require_once("checkRights.php");
-}
+    if(isset($_SESSION["session_email"])){
+        require_once("checkRights.php");
+    }
 
 	if(isset($_POST["login"])){
 
-    $message = 'Unexpected error';
-	if(!empty($_POST['email']) && !empty($_POST['password'])) {
-	$email=htmlspecialchars($_POST['email']);
-	$password=htmlspecialchars($_POST['password']);
-	$query =$mysqli->query("SELECT * FROM users WHERE email='".$email."' AND password='".$password."'");
-	$numrows=mysqli_num_rows($query);
-	if($numrows!=0)
- {
-while($row=mysqli_fetch_assoc($query))
- {
-    $dbemail=$row['email'];
-    $dbid=$row['id'];
-    $dbpassword=$row['password'];
-    $dbrights=$row['rights'];
-    $dbconfirmation=$row['confirmation'];
- }
-  if($email == $dbemail && $password == $dbpassword)
- {
-	 $_SESSION['session_email']=$email;	 
-     $_SESSION['session_userid']=$dbid;
-     $_SESSION['session_rights']=$dbrights;
-     $_SESSION['session_confirmation']=$dbconfirmation;
+        $message = 'Неожиданная ошибка';
+        if(!empty($_POST['email']) && !empty($_POST['password'])) {
+            $email=htmlspecialchars($_POST['email']);
+            $password=htmlspecialchars($_POST['password']);
+            // Запрос на существование данных аккаунта с такими email и паролем в системе
+            $query =$mysqli->query("SELECT * FROM users WHERE email='".$email."' AND password='".$password."'");
+            $numrows=mysqli_num_rows($query);
+            if($numrows!=0)
+            {
+                while($row=mysqli_fetch_assoc($query))
+                {
+                    $dbemail=$row['email'];
+                    $dbfullname=$row['fullname'];
+                    $dbid=$row['id'];
+                    $dbpassword=$row['password'];
+                    $dbrights=$row['rights'];
+                    $dbconfirmation=$row['confirmation'];
+                }
+                if($email == $dbemail && $password == $dbpassword)
+                {
+                    $_SESSION['session_email']=$email;	 
+                    $_SESSION['session_userid']=$dbid;
+                    $_SESSION['session_userFullname']=$dbfullname;
+                    $_SESSION['session_rights']=$dbrights;
+                    $_SESSION['session_confirmation']=$dbconfirmation;
 
-     require_once("checkRights.php");
-    }
-	} else {
-	 $message = "Invalid email or password!";
- }
-	} else {
-    $message = "All fields are required!";
-	}
+                    require_once("checkRights.php");
+                }
+            } else {
+                $message = "Неправильный Email или пароль!";
+            }
+        } else {
+        $message = "Все поля обязательны для заполнения!";
+        }
 	}
     ?>
         

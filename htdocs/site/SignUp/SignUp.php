@@ -11,33 +11,33 @@
 	$message= "";
     
 	if(isset($_POST["register"])){
-	
-	if(!empty($_POST['FullName']) && !empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password'])) {
-  $FullName= htmlspecialchars($_POST['FullName']);
-	$email=htmlspecialchars($_POST['email']);
- $username=htmlspecialchars($_POST['username']);
- $password=htmlspecialchars($_POST['password']);
- $query=$mysqli->query("SELECT * FROM users WHERE email='".$email."'");
-  $numrows=mysqli_num_rows($query);
+		
+		if(!empty($_POST['FullName']) && !empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password'])) {
+		$FullName= htmlspecialchars($_POST['FullName']);
+		$email=htmlspecialchars($_POST['email']);
+		$username=htmlspecialchars($_POST['username']);
+		$password=htmlspecialchars($_POST['password']);
+		$query=$mysqli->query("SELECT * FROM users WHERE email='".$email."'");
+		$numrows=mysqli_num_rows($query);
 
-if($numrows==0)
-   {
-	$sql="INSERT INTO users
-  (fullname, email, username,password)
-	VALUES('$FullName','$email', '$username', '$password')";
-  $result=$mysqli->query($sql);
- if($result){
-    $message = "Account Successfully Created";
-    header("Location: http://${IpAddress}/site/Login/Login.php",true,301);
-} else {
- $message = "Failed to insert data information!";
-  }
-	} else {
-	$message = "That Email already exists!";
-   }
-	} else {
-	$message = "All fields are required!";
-	}
+		if($numrows==0)
+			{
+				$sql="INSERT INTO users
+				(fullname, email, username,password)
+				VALUES('$FullName','$email', '$username', '$password')";
+				$result=$mysqli->query($sql);
+			  if($result){
+					$message = "Аккаунт успешно создан";
+					header("Location: http://${IpAddress}/site/Login/Login.php",true,301);
+			  } else {
+			  	$message = "Ошибка вставки информации!";
+				}
+			} else {
+			$message = "Данный Email уже существует!";
+			}
+		} else {
+		$message = "Все поля обязательны для заполнения!";
+		}
 	}
 	?>
 <div class="register">

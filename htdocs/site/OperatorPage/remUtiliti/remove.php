@@ -11,7 +11,7 @@
     $availableUtilities = $mysqli->query("SELECT servicelist.name as serviceName  FROM servicelist");
     if(isset($_POST["remUtiliti"]) && $_POST["remUtiliti"] != '' ){
         $remName=$_POST["remUtiliti"];
-    $remId=$mysqli->query("SELECT servicelist.id as serviceId , servicelist.name as serviceName FROM servicelist WHERE servicelist.name='{$remName}'");
+        $remId=$mysqli->query("SELECT servicelist.id as serviceId , servicelist.name as serviceName FROM servicelist WHERE servicelist.name='{$remName}'");
         $Id = mysqli_fetch_array($remId);
         $remId=$Id["serviceId"];
         $mysqli->query("DELETE FROM `servicelist` WHERE `servicelist`.`id` = $remId");

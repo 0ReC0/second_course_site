@@ -106,29 +106,29 @@ if(!isset($_SESSION["session_email"])){
                         users WHERE users.email = '{$_SESSION['selectedUser']}' AND users.rights = 'user'");
                     printf(mysqli_error($mysqli));
                 }
-            if(isset($_SESSION['selectedUser']) && isset($selectedUtilities)){
-                $selectedUtilities = $mysqli->query("SELECT utilities.serviceid as serviceid,
-                utilities.servicename as servicename,utilities.rate as servicecost, utilities.important as serviceimportant FROM utilities,
-                users WHERE users.email = '{$_SESSION['selectedUser']}' AND users.rights = 'user' AND users.id = utilities.userid");
-            while ($row = mysqli_fetch_assoc($selectedUtilities)) {
-                echo '<tr>';
-                echo '<td>'.$row["servicename"].'</td>';
-                echo '<td>'.$row["servicecost"].'</td>';
-                if ($row["serviceimportant"] == '1'){
-                    echo '<td>Да</td>';
-                }else{
-                    echo '<td>Нет</td>';
+                if(isset($_SESSION['selectedUser']) && isset($selectedUtilities)){
+                    $selectedUtilities = $mysqli->query("SELECT utilities.serviceid as serviceid,
+                    utilities.servicename as servicename,utilities.rate as servicecost, utilities.important as serviceimportant FROM utilities,
+                    users WHERE users.email = '{$_SESSION['selectedUser']}' AND users.rights = 'user' AND users.id = utilities.userid");
+                    while ($row = mysqli_fetch_assoc($selectedUtilities)) {
+                        echo '<tr>';
+                        echo '<td>'.$row["servicename"].'</td>';
+                        echo '<td>'.$row["servicecost"].'</td>';
+                        if ($row["serviceimportant"] == '1'){
+                            echo '<td>Да</td>';
+                        }else{
+                            echo '<td>Нет</td>';
+                        }
+                        echo '<td>
+                        <form name="deleteUtiliti" method="post">
+                            <button type="submit" name="deleteUtiliti" value="'.$row["serviceid"].'">
+                            x
+                            </button>
+                        </form>
+                        </td>';
+                        echo '</tr>';
+                    };
                 }
-                echo '<td>
-                <form name="deleteUtiliti" method="post">
-                    <button type="submit" name="deleteUtiliti" value="'.$row["serviceid"].'">
-                    x
-                    </button>
-                </form>
-                </td>';
-                echo '</tr>';
-            };
-        }
         ?>
             </tbody>
         </table>

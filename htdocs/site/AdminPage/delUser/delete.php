@@ -16,7 +16,7 @@ if(!isset($_SESSION["session_email"])){
 }
 ?>
         <?php
-        $AllUsers = $mysqli->query("SELECT users.email as UserEmail FROM users");
+        $AllUsers = $mysqli->query("SELECT users.email as UserEmail FROM users WHERE users.rights != 'admin'");
         ?>
         <p><label>Выберите email пользователя
             <form method="post">
@@ -33,32 +33,45 @@ if(!isset($_SESSION["session_email"])){
         </label><p>
         <span>Выбранный пользователь 
         <?php
-                if(isset($_SESSION["selectedUser"])){
-                    echo $_SESSION["selectedUser"];
-                    $selectedUser = $mysqli->query("SELECT users.id as userID FROM users WHERE users.email = '{$_SESSION["selectedUser"]}' ");
+                if(isset($_POST["selectUser"])){
+                    echo $_POST["selectUser"];
+                    $selectedUser = $mysqli->query("SELECT users.id as userID FROM users WHERE users.email = '{$_POST["selectUser"]}' ");
                     $selectedUser=mysqli_fetch_assoc($selectedUser);
-                    echo $selectedUser['userID'];
+                    $_SESSION['selectedUserID']= $selectedUser['userID'];
                 }
         ?>
         </span>
         <?php
-            if(isset($_POST["selectUser"])){
-        $_SESSION['selectedUser']=$_POST["selectUser"];
-        }
         if(isset($_SESSION['selectedUserID'])){
-            if(isset($_POST['confirm'])){
-                $mysqli->query("UPDATE `users` SET `confirmation` = '1' WHERE `users`.`id` = '{$_SESSION['selectedUserID']}'");
+            if(isset($_POST['delete'])){
+                $selectedUser = $mysqli->query("SELECT * FROM users WHERE users.id = '{$_SESSION["selectedUserID"]}' ");
+                $selectedUser=mysqli_fetch_assoc($selectedUser);
                 printf(mysqli_error($mysqli));
-                if(!mysqli_error($mysqli)){
-                    echo "Пользователь успешно подтвержден";
+                if (isset($selectedUser['fullname'])){
+                    $mysqli->query("INSERT INTO `delusers` (`id`, `fullname`, `email`, `username`, `password`)
+                    VALUES (NULL, '{$selectedUser['fullname']}', '{$selectedUser['email']}',
+                     '{$selectedUser['username']}', '{$selectedUser['password']}');");
+                   printf(mysqli_error($mysqli));
+                    $mysqli->query("DELETE FROM `users` WHERE `users`.`id` = '{$_SESSION['selectedUserID']}'");
+                   printf(mysqli_error($mysqli));
+                   $AllUsers = $mysqli->query("SELECT users.email as UserEmail FROM users WHERE users.rights != 'admin'");
+                   if(!mysqli_error($mysqli)){
+                       echo "Пользователь успешно удалён";
+                   }
                 }
+
             }
         }
         ?>
-
+        <?php
+if(isset($_POST["selectUser"])){
+    echo '
 <form method="post">
-<button name="confirm" type="submit">Удалить пользователя</button>
+<button name="delete" type="submit">Удалить пользователя</button>
 </form>
+';
+}
+?>
 <p ><a href="../selectAction.php">Вернуться</a> в меню выбора действия</p>
 <p class="logout"><a href="../../Logout/Logout.php">Выйти</a> из системы</p>
 
