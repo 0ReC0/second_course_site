@@ -20,6 +20,9 @@
     grid-template-columns: repeat(4,1fr);
     background: white;
 }
+*{
+    box-sizing: border-box;
+}
 .LoginTitle {
     grid-column: 1/5;
     grid-row:1;
@@ -39,7 +42,6 @@
     grid-column: 1/5;
     grid-row:3;
     align-self: center;
-    grid-template-rows: 40px 30px;
 }
 .EmailTitle {
     grid-row:1;
@@ -53,7 +55,6 @@
     grid-column: 1/5;
     grid-row:4;
     align-self: center;
-    grid-template-rows: 40px 30px;
 }
 .PasswordTitle {
     grid-row:1;
@@ -67,25 +68,13 @@
     grid-column: 1/5;
     display: grid;
     grid-template-rows: 1fr 1fr;
-    grid-row-gap: 20px;
+    grid-row-gap: 10px;
     
-}
-.SignInButton:hover {
-    background: radial-gradient(at top, rgb(47, 194, 33), rgb(23, 187, 8));
-}
-.SignUpButton:hover {
-    background: radial-gradient(at top, rgb(4, 96, 99), rgb(4, 141, 146));
 }
 .SignInButton{ 
     grid-row: 1;
-    border: solid 1px #16bd24;
-    background: radial-gradient(at top, rgb(45, 240, 27), rgb(22, 180, 7));
-    border-radius: 8px;
 }
 .SignUpButton {
     grid-row: 2;
-    border-radius: 8px;
-    border: solid 1px #1680bd;
-    background: radial-gradient(at top, rgb(5, 122, 126), rgb(7, 174, 180));
 
 }

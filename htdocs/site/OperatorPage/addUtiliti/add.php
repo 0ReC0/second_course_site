@@ -3,6 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" media="screen" href="add.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../bootstrap-dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
 </head>
 <body>
     <?php require_once("../../DataBase/connection.php");?> 
@@ -32,16 +35,27 @@
     }
     ?>
     <div class="actions">
-    <span style="grid-row:1; font-size:20px;text-align:center;">Добавление услуги</span>
+    <span style="grid-row:1; font-size:24px;text-align:center;">Добавление услуги</span>
     <form class="OperatorInputs" name="OperatorInputs" method="post">
         <span style="grid-row:1; font-size:20px;color:red;"><?php echo $message; ?></span>
-        <label style="grid-row:2;">Название<input type="text" name="name"></label>
-        <label style="grid-row:3;">Коэф услуги<input type="number" name="rate"></label>
-        <label style="grid-row:4;">Обязательна ли услуга ?<input type="checkbox" name="important"></label>
-        <label style="grid-row:5;"><input type="submit" name="OperatorInputs" value="Добавить услугу"></label>
+        <div style="grid-row:2;" class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Название</span>
+            </div>
+            <input type="text" name="name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div style="grid-row:3;" class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Коэф услуги</span>
+            </div>
+            <input type="number" name="rate" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <label style="grid-row:4;">Обязательна ли услуга ? <input type="checkbox" name="important"></label>
+        <label style="grid-row:5;justify-self:center;"><input type="submit" class="btn btn-outline-success" name="OperatorInputs" value="Добавить услугу"></label>
     </form>
     <p style="grid-row:6;"><a href="../selectAction.php">Вернуться</a> в меню выбора действия</p>
     <p style="grid-row:7;"><a href="../../Logout/Logout.php">Выйти</a> из системы</p>
     </div>
+
 </body>
 </html>

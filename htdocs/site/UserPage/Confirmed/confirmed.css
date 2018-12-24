@@ -18,3 +18,6 @@ body {
     grid-template-rows: auto;
     grid-row-gap: 10px;
 }
+*{
+    box-sizing: border-box;
+}

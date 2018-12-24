@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" media="screen" href="confirm.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../bootstrap-dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <body>
     <div class="Container">
@@ -20,15 +22,19 @@ if(!isset($_SESSION["session_email"])){
         ?>
         <p><label>Выберите email пользователя
             <form method="post">
-            <select name="selectUser">
-                <option disabled selected>Выберите email</option>
-                <?php
-                while( $row = mysqli_fetch_assoc($AllUsers) ) {
-                    echo '<option>'.$row["UserEmail"].'</option>';
-                };
-                ?>
-            </select>
-                <input type="submit"  value="Выбрать" >
+                <div class="input-group">
+                    <select class="custom-select" name="selectUser" id="inputGroupSelect04" aria-label="Example select with button addon">
+                        <option disabled selected>Выберите email</option>
+                        <?php 
+                        while( $row = mysqli_fetch_assoc($AllUsers) ) {
+                            echo '<option>'.$row["UserEmail"].'</option>';
+                        };
+                        ?>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="submit">Выбрать</button>
+                    </div>
+                </div>
             </form>
         </label><p>
         <span>Выбранный пользователь 
@@ -67,7 +73,7 @@ if(!isset($_SESSION["session_email"])){
 if(isset($_POST["selectUser"])){
     echo '
 <form method="post">
-<button name="delete" type="submit">Удалить пользователя</button>
+<button name="delete" class="btn btn-outline-danger" type="submit">Удалить пользователя</button>
 </form>
 ';
 }

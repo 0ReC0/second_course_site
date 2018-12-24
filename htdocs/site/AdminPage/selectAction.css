@@ -18,6 +18,9 @@ input {
     height: 100%;
     text-align: center;
 }
+*{
+    box-sizing: border-box;
+}
 input:hover {
     background: rgb(230, 227, 227);
 }

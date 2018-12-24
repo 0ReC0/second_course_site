@@ -21,3 +21,6 @@ input {
 input:hover {
     background: rgb(230, 227, 227);
 }
+*{
+    box-sizing: border-box;
+}

@@ -41,3 +41,6 @@ h1 {
     background: radial-gradient(at top, rgb(5, 122, 126), rgb(7, 174, 180));
 
 }
+*{
+    box-sizing: border-box;
+}
