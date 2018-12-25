@@ -1,0 +1,12 @@
+
+.utHead{
+    width: 150px;
+    border:1px solid black;
+}
+
+hr{
+    width: 100%;
+}
+*{
+    box-sizing: border-box;
+}

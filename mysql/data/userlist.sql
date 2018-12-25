@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Дек 24 2018 г., 15:51
+-- Время создания: Дек 25 2018 г., 16:29
 -- Версия сервера: 10.1.37-MariaDB
 -- Версия PHP: 7.2.12
 
@@ -44,7 +44,8 @@ INSERT INTO `delusers` (`id`, `fullname`, `email`, `username`, `password`) VALUE
 (2, 'asdf', 'sergei@operator.ru', 'sergei', 'operator'),
 (4, 'anton pushkin', 'anton@user.ru', 'antonio', 'anton'),
 (8, 'sad', 'ivan@ivan.ru', 'sdf', 'ivan'),
-(10, 's', 'sergei@user.ru', 'sergei', 'user');
+(10, 's', 'sergei@user.ru', 'sergei', 'user'),
+(11, 'sdf', 'user@user.ru', 'sad', 'user');
 
 -- --------------------------------------------------------
 
@@ -94,7 +95,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `fullname`, `email`, `username`, `password`, `rights`, `confirmation`) VALUES
 (12, 'asdf', 'sergei@operator.ru', 'sergei', 'operator', 'operator', 0),
 (13, 'sad', 'sergei@admin.ru', 'dsf', 'admin', 'admin', 0),
-(16, 'sdf', 'user@user.ru', 'sad', 'user', 'user', 1);
+(17, 'asd', 'user@user.ru', 'asdv', 'user', 'user', 1);
 
 -- --------------------------------------------------------
 
@@ -120,20 +121,22 @@ INSERT INTO `utilities` (`serviceid`, `rate`, `value`, `userid`, `servicename`, 
 (82, 5, 3, 11, 'Газоснабжение', 1),
 (83, 2, 23, 14, 'Вода', 1),
 (84, 5, 213, 14, 'Газоснабжение', 1),
-(85, 3, 123, 14, 'Канализация', 1),
 (86, 2, 23, 11, 'Вода', 1),
 (88, 2, 10, 15, 'Вода', 1),
 (90, 4, 1, 15, 'Вывоз ТБО', 1),
 (91, 5, 9, 15, 'Газоснабжение', 1),
-(96, 3, 987, 15, 'Канализация', 1),
-(97, 3, 56, 15, 'Отопление', 1),
 (99, 2, 12, 15, 'Электроэнергия', 1),
 (100, 2, 78, 16, 'Вода', 1),
-(101, 4, 312, 16, 'Вывоз ТБО', 1),
-(102, 5, 3123, 16, 'Газоснабжение', 1),
-(103, 3, 123, 16, 'Канализация', 1),
-(104, 3, 23, 16, 'Отопление', 1),
-(105, 2, 213, 16, 'Электроэнергия', 1);
+(102, 5, 567, 16, 'Газоснабжение', 1),
+(105, 2, 56, 16, 'Электроэнергия', 1),
+(106, 3, 78, 16, 'Канализация', 1),
+(111, 2, 32, 17, 'Вода', 1),
+(112, 4, 123, 17, 'Вывоз ТБО', 1),
+(113, 5, 543, 17, 'Газоснабжение', 1),
+(114, 3, 435, 17, 'Канализация', 1),
+(115, 3, 1213, 17, 'Отопление', 1),
+(116, 2, 214, 17, 'Электроэнергия', 1),
+(117, 3, 1213, 17, 'Отопление', 1);
 
 --
 -- Индексы сохранённых таблиц
@@ -182,25 +185,25 @@ ALTER TABLE `utilities`
 -- AUTO_INCREMENT для таблицы `delusers`
 --
 ALTER TABLE `delusers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT для таблицы `servicelist`
 --
 ALTER TABLE `servicelist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT для таблицы `utilities`
 --
 ALTER TABLE `utilities`
-  MODIFY `serviceid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `serviceid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
