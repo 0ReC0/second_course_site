@@ -10,7 +10,7 @@ session_start();
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" media="screen" href="selectAction.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../assets/bootstrap-dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/bootstrap-dist/css/bootstrap.min.css" crossorigin="anonymous">
 </head>
 <body>
     <div class="actions">
@@ -18,7 +18,7 @@ session_start();
     <label style="grid-row:2;"><form action="addUtiliti/add.php"><button type="submit" class="btn btn-outline-primary btn-lg btn-block">Добавить коммунальную услугу</button></form></label>
     <label style="grid-row:3;"><form action="remUtiliti/remove.php"><button type="submit" class="btn btn-outline-primary btn-lg btn-block">Удалить коммунальную услугу</button></form></label>
     <label style="grid-row:4;"><form action="attachUtiliti/attach.php"><button type="submit" class="btn btn-outline-primary btn-lg btn-block">Добавление / Удаление услуги конкретного пользователя</button></form></label>
-    <p style="grid-row:6;"><a href="../Logout/Logout.php">Выйти</a> из системы</p>
+    <p style="grid-row:6;"><a href="/Logout/Logout.php">Выйти</a> из системы</p>
     </div>
 </body>
 </html>

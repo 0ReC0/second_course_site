@@ -13,7 +13,7 @@ if (!isset($_SESSION["session_email"])) {
             <title>Подсчёт коммунальных услуг</title>
     <link rel="shortcut icon" type="image/png" href="../../assets/icons/favicon.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../../assets/bootstrap-dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/bootstrap-dist/css/bootstrap.min.css"crossorigin="anonymous">
 
 </head>
 <body>
@@ -41,6 +41,7 @@ if (!isset($_SESSION["session_email"])) {
                 <?php
                 $_SESSION['EditedUserId'] = '';
                 $_SESSION['EditedUserUtilitiImportant'] = '';
+                
                 if (isset($_POST["selectUser"])) {
                     $_SESSION['selectedUser'] = $_POST["selectUser"];
                     $selectedUtilities = $mysqli->query("SELECT utilities.serviceid as serviceid, users.id as userId,
@@ -145,8 +146,8 @@ if (!isset($_SESSION["session_email"])) {
                 </table>
             </div>
             <!-- END Counting Utilities -->
-        <p ><a href="../selectAction.php">Вернуться</a> в меню выбора действия</p>
-        <p class="logout"><a href="../../Logout/Logout.php">Выйти</a> из системы</p>
+        <p ><a href="/selectAction.php">Вернуться</a> в меню выбора действия</p>
+        <p class="logout"><a href="/Logout/Logout.php">Выйти</a> из системы</p>
     </div>
 </body>
 </html>

@@ -17,7 +17,7 @@
             <title>Подсчёт коммунальных услуг</title>
     <link rel="shortcut icon" type="image/png" href="../../assets/icons/favicon.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../../assets/bootstrap-dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/bootstrap-dist/css/bootstrap.min.css"crossorigin="anonymous">
 </head>
 <body>
 <div class="actions">
@@ -29,7 +29,7 @@
     <form class="UserInputs" name="UserInputs" method="post">
     <div style="grid-template-rows:repeat(5,1fr);">
     <div style="grid-row:1; font-size:20px;color:red;"><?php echo $message; ?></div>
-    <div style="grid-row:2;font-size:20px;font-weight:bold;text-align:center" class="mb-3">Введите стостояния счётчиков</div>
+    <div style="grid-row:2;font-size:20px;font-weight:bold;text-align:center" class="mb-3">Введите состояния счётчиков</div>
     <?php
             if(isset($_POST['utilitiValue']) && isset($_POST['utilitiName'])){
                 $mysqli->query("UPDATE `utilities` SET `value` = '{$_POST['utilitiValue']}' WHERE `utilities`.`servicename` = '{$_POST['utilitiName']}' AND utilities.userid = '{$_SESSION['session_userid']}'");

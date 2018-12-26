@@ -2,7 +2,6 @@
     session_start();
     require_once("../../DataBase/connection.php");
     $message='';
-    require_once("../../IpAddress/IpAddress.php");
     if($_SESSION['session_rights'] != 'operator'){
         require_once("../../Login/checkRights.php");
     }
@@ -37,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Подсчёт коммунальных услуг</title>
     <link rel="shortcut icon" type="image/png" href="../../assets/icons/favicon.png"/>
-    <link rel="stylesheet" href="../../assets/bootstrap-dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/bootstrap-dist/css/bootstrap.min.css" crossorigin="anonymous">
 
 </head>
 <body>
@@ -60,8 +59,8 @@
         <label style="grid-row:4;">Обязательна ли услуга ? <input type="checkbox" name="important"></label>
         <label style="grid-row:5;justify-self:center;"><input type="submit" class="btn btn-outline-success" name="OperatorInputs" value="Добавить услугу"></label>
     </form>
-    <p style="grid-row:6;"><a href="../selectAction.php">Вернуться</a> в меню выбора действия</p>
-    <p style="grid-row:7;"><a href="../../Logout/Logout.php">Выйти</a> из системы</p>
+    <p style="grid-row:6;"><a href="/selectAction.php">Вернуться</a> в меню выбора действия</p>
+    <p style="grid-row:7;"><a href="/Logout/Logout.php">Выйти</a> из системы</p>
     </div>
 
 </body>

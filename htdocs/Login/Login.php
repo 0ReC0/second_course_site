@@ -52,7 +52,7 @@ if(isset($_POST["login"])){
     <link rel="shortcut icon" type="image/png" href="../assets/icons/favicon.png"/>
     <link rel="stylesheet" type="text/css" media="screen" href="Login.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../assets/bootstrap-dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" crossorigin="anonymous" href="/assets/bootstrap-dist/css/bootstrap.min.css">
 </head>
 <body class="MainStyle">
         

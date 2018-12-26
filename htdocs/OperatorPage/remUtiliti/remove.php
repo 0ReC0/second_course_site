@@ -6,7 +6,7 @@
             <title>Подсчёт коммунальных услуг</title>
     <link rel="shortcut icon" type="image/png" href="../../assets/icons/favicon.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../../assets/bootstrap-dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/bootstrap-dist/css/bootstrap.min.css"crossorigin="anonymous">
 </head>
 <body>
 <?php require_once("../../DataBase/connection.php");?> 
@@ -49,8 +49,8 @@
                     </div>
             </div>
             </form>  
-    <p style="grid-row:4;"><a href="../selectAction.php">Вернуться</a> в меню выбора действия</p>
-    <p style="grid-row:5;"><a href="../../Logout/Logout.php">Выйти</a> из системы</p>
+    <p style="grid-row:4;"><a href="/selectAction.php">Вернуться</a> в меню выбора действия</p>
+    <p style="grid-row:5;"><a href="/Logout/Logout.php">Выйти</a> из системы</p>
             </div>
 </body>
 </html>

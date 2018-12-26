@@ -13,7 +13,7 @@ if(!isset($_SESSION["session_email"])){
             <title>Подсчёт коммунальных услуг</title>
     <link rel="shortcut icon" type="image/png" href="../../assets/icons/favicon.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../../assets/bootstrap-dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../assets/bootstrap-dist/css/bootstrap.min.css"  crossorigin="anonymous">
 </head>
 <body>
     <div class="actions">
@@ -49,22 +49,6 @@ if(!isset($_SESSION["session_email"])){
                 $_SESSION['EditedUserId']=$selectedUtiliti["usersid"];
                 $_SESSION['EditedUserUtilitiImportant']=$selectedUtiliti["serviceimportant"];
                     printf(mysqli_error($mysqli));
-                }
-                if(isset($_POST["addUtiliti"])){
-                    $addingVar=$mysqli->query("SELECT servicelist.rate as addingcost, servicelist.important as serviceimportant
-                            FROM servicelist WHERE servicelist.name = '{$_POST["addUtiliti"]}'");
-                    $servicename=$_POST["addUtiliti"];
-                    $service = mysqli_fetch_assoc($addingVar);
-                    $serviceimportant = $service['serviceimportant'];
-                    $servicecost = (integer) $service['addingcost'];
-                    $mysqli->query("INSERT INTO `utilities` ( `serviceid`, `value`, `userid`, `servicename`,`important`)
-                        VALUES (NULL, '$servicecost', '{$_SESSION['EditedUserId']}', '$servicename','$serviceimportant')");
-                    echo mysqli_error($mysqli);
-                    $selectedUtilities = $mysqli->query("SELECT users.id as usersid , utilities.serviceid as serviceid,
-                    utilities.servicename as servicename, utilities.important as serviceimportant FROM utilities,
-                        users WHERE users.email = '{$_SESSION['selectedUser']}' AND users.rights = 'user' AND users.id = utilities.userid");
-                    printf(mysqli_error($mysqli));
-                    
                 }
                 ?>
             <!-- Counting Utilities -->

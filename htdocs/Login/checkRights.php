@@ -14,6 +14,5 @@
      }
      else{
       header("Location: /Login/Login.php",true,301);
-
      }
 ?>
