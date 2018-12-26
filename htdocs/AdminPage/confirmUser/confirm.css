@@ -1,0 +1,21 @@
+body {
+    display: grid;
+    background: #f2f2f2;
+    height: 100vh;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    background-color: #e7eaec48 !important;
+    padding: 20px;
+}
+*{
+    box-sizing: border-box;
+}
+.actions{
+    padding: 15px;
+    grid-column: 2;
+    width: 100%;
+    grid-row:2;
+    border-radius: 8px;
+    background-color: white;
+    border: 1px solid #dee2e6;
+}

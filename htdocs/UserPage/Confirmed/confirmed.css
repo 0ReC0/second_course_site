@@ -1,0 +1,33 @@
+body {
+    display: grid;
+    background-color: #f2f2f2;
+    height: 100vh;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    background-color: #e7eaec48 !important;
+    padding: 20px;
+}
+.UserInputs{
+    grid-column: 2;
+    justify-content: center;
+    display: grid;
+}
+.utilitiValues{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: 1fr;
+    grid-row-gap: 10px;
+}
+*{
+    box-sizing: border-box;
+}
+.actions{
+    grid-column: 2;
+    grid-template-columns: 5% 90% 5%;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-row:2;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: white;
+    border: 1px solid #dee2e6;
+}

@@ -1,0 +1,27 @@
+body {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    background-color: #e7eaec48 !important;
+    padding: 20px;
+}
+.actions{
+    grid-column: 2;
+    width: 100%;
+    grid-row:2;
+    justify-self: center;
+    display: grid;
+    background: white;
+    grid-template-rows: repeat(4,60px);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+.OperatorInputs{
+    display: grid;
+    grid-template-rows: repeat(5,1fr)
+}
+*{
+    box-sizing: border-box;
+}
