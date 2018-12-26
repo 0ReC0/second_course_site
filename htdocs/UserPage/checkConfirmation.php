@@ -5,5 +5,4 @@
     }else if (!$_SESSION['session_confirmation']){
         header("Location: /UserPage/NotConfirmed/notconfirmed.php");
     }
-    
 ?>
