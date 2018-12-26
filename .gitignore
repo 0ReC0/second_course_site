@@ -167,7 +167,7 @@ mysql/data/ib_logfile0
 
 mysql/data/ib_logfile1
 
-mysql/data/ibdata1
+mysql/data/
 
 mysql/data/multi-master\.info
 
